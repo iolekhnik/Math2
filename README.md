@@ -1,1 +1,1 @@
-https://iolekhnik.github.io/Math1/
+https://iolekhnik.github.io/Math2/
