@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ирина Олехник — подготовка к ЦТ/ЦЭ по математике</title>
+<meta name="description" content="Курсы подготовки к ЦТ и ЦЭ по математике с Ириной Олехник. Мини-группы и индивидуальные занятия. Пробный тест прямо на сайте.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Piazzolla:opsz,wght@8..30,400;8..30,600;8..30,800&family=Onest:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBFAF4;
+  --paper-2:#F4F2E8;
+  --grid:#D9E4EF;
+  --ink:#16307A;
+  --ink-deep:#0D1B45;
+  --red:#D6382E;
+  --graphite:#5A5F6B;
+  --mark:#FFE97F;
+  --ok:#2E8B57;
+  --radius:14px;
+  --disp:'Piazzolla',Georgia,serif;
+  --body:'Onest',system-ui,sans-serif;
+  --hand:'Caveat',cursive;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);
+  color:var(--ink-deep);
+  background:var(--paper);
+  line-height:1.6;
+  font-size:17px;
+}
+/* тетрадная клетка */
+.grid-bg{
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:26px 26px;
+  background-color:var(--paper);
+}
+h1,h2,h3{font-family:var(--disp);font-weight:800;line-height:1.15;color:var(--ink-deep)}
+h2{font-size:clamp(28px,4vw,44px);margin-bottom:14px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+section{padding:84px 0}
+a{color:var(--ink)}
+img{max-width:100%}
+
+/* рукописные пометки */
+.hand{font-family:var(--hand);color:var(--red);font-weight:700;line-height:1.1}
+.mark{
+  background:linear-gradient(180deg, transparent 52%, var(--mark) 52%, var(--mark) 94%, transparent 94%);
+  padding:0 3px;
+}
+.eyebrow{
+  font-family:var(--hand);font-size:26px;color:var(--red);display:block;margin-bottom:6px;
+  transform:rotate(-1.4deg);transform-origin:left;
+}
+.red-underline{position:relative;white-space:nowrap}
+.red-underline svg{position:absolute;left:0;bottom:-10px;width:100%;height:14px;overflow:visible}
+.red-underline path{stroke:var(--red);stroke-width:3.4;fill:none;stroke-linecap:round}
+
+/* ===== NAV ===== */
+nav{
+  position:sticky;top:0;z-index:60;background:rgba(251,250,244,.92);backdrop-filter:blur(8px);
+  border-bottom:2px solid var(--red);
+}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-family:var(--disp);font-weight:800;font-size:21px;color:var(--ink-deep);text-decoration:none;display:flex;align-items:baseline;gap:8px}
+.logo .hand{font-size:22px}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{text-decoration:none;color:var(--ink-deep);font-weight:500;font-size:15px}
+.nav-links a:hover{color:var(--red)}
+.btn{
+  display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;
+  padding:13px 26px;border-radius:999px;border:none;cursor:pointer;font-size:16px;font-family:var(--body);
+  transition:transform .15s, box-shadow .15s, background .15s;
+}
+.btn:hover{background:var(--ink-deep);transform:translateY(-2px);box-shadow:0 8px 20px rgba(22,48,122,.25)}
+.btn.small{padding:9px 20px;font-size:14px}
+.btn.red{background:var(--red)}
+.btn.red:hover{background:#B22B22;box-shadow:0 8px 20px rgba(214,56,46,.28)}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.burger{display:none;background:none;border:none;font-size:26px;cursor:pointer;color:var(--ink-deep)}
+
+/* ===== HERO ===== */
+.hero{padding:70px 0 40px;overflow:hidden}
+.hero-in{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(34px,4.6vw,58px);margin-bottom:20px}
+.hero p.lead{font-size:19px;color:var(--graphite);max-width:520px;margin-bottom:30px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.hero-note{font-family:var(--hand);font-size:22px;color:var(--red);transform:rotate(-2deg)}
+
+/* тетрадный лист с графиком */
+.sheet{
+  background:#fff;border:1px solid #E4E1D3;border-radius:6px;
+  box-shadow:0 24px 50px -20px rgba(13,27,69,.25), 0 3px 0 #E4E1D3;
+  padding:26px 26px 20px 58px;position:relative;transform:rotate(1.2deg);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:26px 26px;
+}
+.sheet::before{ /* поля тетради */
+  content:'';position:absolute;top:0;bottom:0;left:40px;width:2px;background:rgba(214,56,46,.55);
+}
+.sheet .task-label{font-family:var(--hand);font-size:24px;color:var(--ink);margin-bottom:4px}
+.sheet svg.graph{width:100%;height:auto;display:block}
+.graph .axis{stroke:var(--ink-deep);stroke-width:1.6}
+.graph .curve{
+  stroke:var(--ink);stroke-width:3;fill:none;stroke-linecap:round;
+  stroke-dasharray:640;stroke-dashoffset:640;animation:draw 2.4s .4s ease forwards;
+}
+.graph .pt{fill:var(--red);opacity:0;animation:pop .4s 2.6s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{to{opacity:1}}
+.sheet .check{
+  position:absolute;right:18px;bottom:14px;font-family:var(--hand);font-size:30px;color:var(--red);
+  transform:rotate(-6deg);opacity:0;animation:pop .5s 3s ease forwards;
+}
+.sticker{
+  position:absolute;font-family:var(--hand);background:var(--mark);padding:6px 14px;font-size:20px;
+  color:var(--ink-deep);box-shadow:0 6px 14px rgba(13,27,69,.15);transform:rotate(-3deg);
+}
+.sticker.s1{top:-16px;left:-14px}
+
+/* ===== COUNTDOWN (линейка) ===== */
+.ruler{
+  background:var(--ink-deep);color:#fff;padding:22px 0;
+  border-top:6px solid var(--red);
+}
+.ruler-in{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.ruler .label{font-family:var(--hand);font-size:26px;color:var(--mark)}
+.count{display:flex;gap:18px}
+.count .cell{text-align:center;min-width:66px}
+.count .num{font-family:var(--disp);font-weight:800;font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+.count .sub{font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+
+/* ===== ЦИФРЫ ===== */
+.facts{padding:64px 0}
+.facts-in{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.fact{
+  background:#fff;border:1px solid #E7E4D6;border-radius:var(--radius);padding:24px;position:relative;
+}
+.fact .big{font-family:var(--disp);font-weight:800;font-size:40px;color:var(--ink)}
+.fact .big em{font-style:normal;color:var(--red)}
+.fact p{font-size:15px;color:var(--graphite);margin-top:4px}
+.fact .hand{position:absolute;top:-14px;right:12px;font-size:20px;transform:rotate(4deg)}
+
+/* ===== QUIZ ===== */
+.quiz{background:var(--paper-2)}
+.quiz-head{max-width:640px;margin-bottom:36px}
+.quiz-head p{color:var(--graphite)}
+.quiz-card{
+  background:#fff;border:1px solid #E7E4D6;border-radius:var(--radius);padding:26px 28px;margin-bottom:18px;
+  transition:border-color .2s;
+}
+.quiz-card .qnum{font-family:var(--hand);font-size:22px;color:var(--ink);margin-bottom:6px}
+.quiz-card .qtext{font-weight:600;font-size:18px;margin-bottom:14px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.opt{
+  border:2px solid #E2DFD0;border-radius:10px;padding:11px 14px;cursor:pointer;background:#fff;
+  font-size:16px;font-family:var(--body);text-align:left;transition:all .15s;
+}
+.opt:hover{border-color:var(--ink)}
+.opt.sel{border-color:var(--ink);background:#EDF1FB}
+.quiz-card.right{border-color:var(--ok)}
+.quiz-card.wrong{border-color:var(--red)}
+.opt.correct{border-color:var(--ok);background:#E8F6EE}
+.opt.incorrect{border-color:var(--red);background:#FBECEA}
+.verdict{font-family:var(--hand);font-size:22px;margin-top:10px;display:none}
+.quiz-card.right .verdict{display:block;color:var(--ok)}
+.quiz-card.wrong .verdict{display:block;color:var(--red)}
+.quiz-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.quiz-result{
+  display:none;margin-top:26px;background:#fff;border:2px dashed var(--red);border-radius:var(--radius);
+  padding:26px 28px;
+}
+.quiz-result .score{font-family:var(--hand);font-size:40px;color:var(--red)}
+.quiz-result p{color:var(--graphite);margin-top:6px}
+
+/* ===== ПРОГРАММА ===== */
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 26px}
+.tab{
+  border:2px solid var(--ink);background:transparent;color:var(--ink);border-radius:999px;
+  padding:10px 22px;font-weight:600;cursor:pointer;font-size:15px;font-family:var(--body);transition:all .15s;
+}
+.tab.active,.tab:hover{background:var(--ink);color:#fff}
+.panel{display:none;animation:fade .3s ease}
+.panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.prog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.prog-card{background:#fff;border:1px solid #E7E4D6;border-radius:var(--radius);padding:22px}
+.prog-card .mod{font-family:var(--hand);font-size:20px;color:var(--red)}
+.prog-card h3{font-size:19px;margin:4px 0 8px}
+.prog-card p{font-size:15px;color:var(--graphite)}
+.prog-meta{display:flex;gap:22px;flex-wrap:wrap;margin-top:22px;font-size:15px;color:var(--graphite)}
+.prog-meta b{color:var(--ink-deep)}
+
+/* ===== ПЛАНИРОВЩИК ===== */
+.plan{background:var(--ink-deep);color:#fff}
+.plan h2,.plan h3{color:#fff}
+.plan .eyebrow{color:var(--mark)}
+.plan-in{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.plan p.sub{color:rgba(255,255,255,.75)}
+.slider-row{margin:26px 0}
+.slider-row label{display:flex;justify-content:space-between;font-weight:600;margin-bottom:10px;font-size:16px}
+.slider-row output{font-family:var(--disp);font-size:22px;color:var(--mark)}
+input[type=range]{width:100%;accent-color:var(--red);height:6px;cursor:pointer}
+.plan-out{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius);
+  padding:30px;
+}
+.plan-out .line{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px dashed rgba(255,255,255,.2);font-size:16px}
+.plan-out .line:last-of-type{border:none}
+.plan-out .line b{font-family:var(--disp);font-size:20px;color:var(--mark)}
+.plan-out .advice{font-family:var(--hand);font-size:24px;color:var(--mark);margin-top:14px;transform:rotate(-1deg)}
+.plan-out .btn{margin-top:18px}
+
+/* ===== ОБО МНЕ ===== */
+.about-in{display:grid;grid-template-columns:.9fr 1.1fr;gap:52px;align-items:center}
+.photo-frame{
+  background:#fff;padding:16px 16px 56px;border:1px solid #E4E1D3;transform:rotate(-2deg);
+  box-shadow:0 24px 50px -18px rgba(13,27,69,.28);position:relative;max-width:400px;
+}
+.photo-frame .ph{
+  aspect-ratio:4/5;background:
+    radial-gradient(circle at 30% 25%, #EDF1FB, #C9D4EE 70%);
+  display:flex;align-items:center;justify-content:center;color:var(--ink);
+  font-family:var(--hand);font-size:26px;text-align:center;padding:20px;
+}
+.photo-frame .cap{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-family:var(--hand);font-size:24px;color:var(--ink-deep)}
+.about li{margin:10px 0 10px 4px;list-style:none;padding-left:34px;position:relative;color:var(--graphite)}
+.about li::before{
+  content:'✓';position:absolute;left:0;top:0;font-family:var(--hand);font-size:24px;color:var(--red);font-weight:700;
+}
+blockquote{
+  margin-top:26px;border-left:4px solid var(--red);padding:6px 0 6px 20px;
+  font-family:var(--disp);font-size:20px;font-style:italic;color:var(--ink-deep);
+}
+
+/* ===== ОТЗЫВЫ ===== */
+.reviews{background:var(--paper-2)}
+.rev-track{
+  display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 4px 22px;
+  scrollbar-width:thin;
+}
+.rev{
+  min-width:320px;max-width:360px;scroll-snap-align:start;background:#fff;border:1px solid #E7E4D6;
+  border-radius:var(--radius);padding:24px;position:relative;
+}
+.rev .score-tag{
+  position:absolute;top:-14px;right:16px;background:var(--red);color:#fff;font-family:var(--hand);
+  font-size:20px;padding:4px 14px;border-radius:999px;transform:rotate(3deg);
+}
+.rev p{font-size:15px;color:var(--graphite)}
+.rev .who{margin-top:14px;font-weight:600;color:var(--ink-deep);font-size:15px}
+.rev-nav{display:flex;gap:10px;margin-top:6px}
+.rev-nav button{
+  width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);background:transparent;color:var(--ink);
+  font-size:18px;cursor:pointer;transition:all .15s;
+}
+.rev-nav button:hover{background:var(--ink);color:#fff}
+
+/* ===== ЦЕНЫ ===== */
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;margin-top:34px}
+.price{
+  background:#fff;border:1px solid #E7E4D6;border-radius:var(--radius);padding:30px;position:relative;
+  display:flex;flex-direction:column;transition:transform .2s, box-shadow .2s;
+}
+.price:hover{transform:translateY(-6px);box-shadow:0 20px 40px -18px rgba(13,27,69,.25)}
+.price.hot{border:2px solid var(--red)}
+.price .flag{
+  position:absolute;top:-16px;left:24px;background:var(--mark);font-family:var(--hand);font-size:20px;
+  padding:4px 16px;transform:rotate(-2deg);box-shadow:0 4px 10px rgba(13,27,69,.12);
+}
+.price h3{font-size:21px;margin-bottom:6px}
+.price .cost{font-family:var(--disp);font-weight:800;font-size:38px;color:var(--ink);margin:10px 0 2px}
+.price .cost span{font-size:16px;font-weight:400;color:var(--graphite);font-family:var(--body)}
+.price ul{margin:16px 0 22px}
+.price li{list-style:none;padding-left:28px;position:relative;font-size:15px;color:var(--graphite);margin:8px 0}
+.price li::before{content:'—';position:absolute;left:0;color:var(--red);font-weight:700}
+.price .btn{margin-top:auto;text-align:center}
+
+/* ===== FAQ ===== */
+details{
+  background:#fff;border:1px solid #E7E4D6;border-radius:var(--radius);margin-bottom:12px;
+  overflow:hidden;
+}
+summary{
+  cursor:pointer;padding:20px 24px;font-weight:600;font-size:17px;list-style:none;position:relative;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{
+  content:'+';position:absolute;right:22px;top:50%;transform:translateY(-50%);
+  font-family:var(--hand);font-size:30px;color:var(--red);transition:transform .2s;
+}
+details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+details .a{padding:0 24px 20px;color:var(--graphite);font-size:15.5px}
+
+/* ===== ФОРМА ===== */
+.signup{background:var(--ink-deep) }
+.signup .grid-bg2{
+  background-image:
+    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size:26px 26px;padding:84px 0;
+}
+.signup h2{color:#fff}
+.signup .eyebrow{color:var(--mark)}
+.signup p.sub{color:rgba(255,255,255,.75);max-width:520px}
+.form-in{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;color:#fff}
+form.lead-form{background:#fff;border-radius:var(--radius);padding:30px;color:var(--ink-deep)}
+.lead-form label{display:block;font-weight:600;font-size:14px;margin:14px 0 6px}
+.lead-form input,.lead-form select,.lead-form textarea{
+  width:100%;padding:12px 14px;border:2px solid #E2DFD0;border-radius:10px;font-family:var(--body);
+  font-size:15px;background:var(--paper);
+}
+.lead-form input:focus,.lead-form select:focus,.lead-form textarea:focus{outline:none;border-color:var(--ink)}
+.lead-form .btn{width:100%;margin-top:20px}
+.form-ok{display:none;text-align:center;padding:30px 10px}
+.form-ok .hand{font-size:34px}
+.contact-list{margin-top:24px}
+.contact-list a{color:var(--mark);font-weight:600}
+.contact-list div{margin:10px 0}
+
+/* ===== FOOTER ===== */
+footer{background:#0A1330;color:rgba(255,255,255,.65);padding:30px 0;font-size:14px;border-top:4px solid var(--red)}
+.foot-in{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}
+footer .hand{color:var(--mark);font-size:20px}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease, transform .6s ease}
+.reveal.vis{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+
+@media (max-width:900px){
+  .hero-in,.plan-in,.about-in,.form-in{grid-template-columns:1fr}
+  .facts-in{grid-template-columns:1fr 1fr}
+  .nav-links{
+    display:none;position:absolute;top:66px;left:0;right:0;background:var(--paper);
+    flex-direction:column;padding:22px;border-bottom:2px solid var(--red);gap:18px;
+  }
+  .nav-links.open{display:flex}
+  .burger{display:block}
+  .sheet{transform:none}
+  section{padding:60px 0}
+}
+@media (max-width:520px){
+  .facts-in{grid-template-columns:1fr}
+  .count .cell{min-width:54px}
+  .count .num{font-size:26px}
+}
+</style>
+</head>
+<body>
+
+<!-- ======== NAV ======== -->
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" href="#top">Ирина Олехник <span class="hand">= математика</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#quiz">Пробный тест</a>
+      <a href="#program">Программа</a>
+      <a href="#plan">Планировщик</a>
+      <a href="#about">Обо мне</a>
+      <a href="#prices">Цены</a>
+      <a href="#faq">Вопросы</a>
+      <a href="#signup" class="btn red small">Записаться</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Меню">☰</button>
+  </div>
+</nav>
+
+<!-- ======== HERO ======== -->
+<header class="hero grid-bg" id="top">
+  <div class="wrap hero-in">
+    <div>
+      <span class="eyebrow">курс подготовки к ЦТ и ЦЭ</span>
+      <h1>Математика, которая <span class="mark">решается</span> — и балл, который <span class="red-underline">радует<svg viewBox="0 0 100 14" preserveAspectRatio="none"><path d="M2 8 Q 25 2, 50 8 T 98 6"/></svg></span></h1>
+      <p class="lead">Готовлю к ЦТ/ЦЭ по математике в мини-группах и индивидуально: от «ничего не помню» до уверенных 80+. Без зубрёжки — с пониманием, откуда что берётся.</p>
+      <div class="hero-ctas">
+        <a href="#quiz" class="btn red">Пройти пробный тест — 3 минуты</a>
+        <a href="#program" class="btn ghost">Смотреть программу</a>
+      </div>
+      <p class="hero-note" style="margin-top:18px">первое занятие — бесплатно ✦</p>
+    </div>
+
+    <div class="sheet">
+      <div class="sticker s1">Вариант ЦТ · часть B</div>
+      <div class="task-label">Задание: постройте график y = −(x−5)² + 8</div>
+      <svg class="graph" viewBox="0 0 300 210" aria-hidden="true">
+        <!-- сетка не нужна, она на листе; оси -->
+        <line class="axis" x1="20" y1="190" x2="290" y2="190"/>
+        <line class="axis" x1="30" y1="200" x2="30" y2="10"/>
+        <polygon points="290,190 281,186 281,194" fill="#0D1B45"/>
+        <polygon points="30,10 26,19 34,19" fill="#0D1B45"/>
+        <!-- парабола ветвями вниз, вершина (150, 40) -->
+        <path class="curve" d="M 50 180 Q 150 -100 250 180"/>
+        <circle class="pt" cx="150" cy="40" r="5"/>
+        <text x="160" y="36" font-family="Caveat" font-size="20" fill="#D6382E" class="pt">вершина (5; 8)</text>
+        <text x="272" y="184" font-family="Caveat" font-size="18" fill="#0D1B45">x</text>
+        <text x="38" y="20" font-family="Caveat" font-size="18" fill="#0D1B45">y</text>
+      </svg>
+      <div class="check">верно! ✓</div>
+    </div>
+  </div>
+</header>
+
+<!-- ======== COUNTDOWN ======== -->
+<div class="ruler">
+  <div class="wrap ruler-in">
+    <div class="label">до ЦТ-2027 осталось:</div>
+    <div class="count" id="countdown">
+      <div class="cell"><div class="num" id="cd-d">—</div><div class="sub">дней</div></div>
+      <div class="cell"><div class="num" id="cd-h">—</div><div class="sub">часов</div></div>
+      <div class="cell"><div class="num" id="cd-m">—</div><div class="sub">минут</div></div>
+      <div class="cell"><div class="num" id="cd-s">—</div><div class="sub">секунд</div></div>
+    </div>
+    <a href="#signup" class="btn red small">Занять место в группе</a>
+  </div>
+</div>
+
+<!-- ======== ЦИФРЫ ======== -->
+<section class="facts">
+  <div class="wrap facts-in">
+    <div class="fact reveal"><span class="hand">опыт</span><div class="big">12<em>+</em></div><p>лет готовлю школьников к ЦТ и ЦЭ по математике</p></div>
+    <div class="fact reveal"><span class="hand">результат</span><div class="big">+27</div><p>баллов — средний рост от первого пробника до экзамена</p></div>
+    <div class="fact reveal"><span class="hand">рекорд</span><div class="big">96<em>/100</em></div><p>лучший результат учеников на ЦТ прошлого года</p></div>
+    <div class="fact reveal"><span class="hand">формат</span><div class="big">6</div><p>человек максимум в группе — каждому хватает внимания</p></div>
+  </div>
+</section>
+
+<!-- ======== QUIZ ======== -->
+<section class="quiz" id="quiz">
+  <div class="wrap">
+    <div class="quiz-head reveal">
+      <span class="eyebrow">проверь себя прямо сейчас</span>
+      <h2>Мини-тест в формате ЦТ</h2>
+      <p>5 заданий уровня части A. Отвечай честно — в конце скажу, с чего тебе стоит начинать подготовку.</p>
+    </div>
+
+    <div id="quizBox">
+      <div class="quiz-card reveal" data-answer="1">
+        <div class="qnum">A1</div>
+        <div class="qtext">Найдите значение выражения 2⁵ · 2⁻³</div>
+        <div class="opts">
+          <button class="opt">2</button>
+          <button class="opt">4</button>
+          <button class="opt">8</button>
+          <button class="opt">¼</button>
+        </div>
+        <div class="verdict"></div>
+      </div>
+
+      <div class="quiz-card reveal" data-answer="2">
+        <div class="qnum">A2</div>
+        <div class="qtext">Решите уравнение 3x − 7 = 11</div>
+        <div class="opts">
+          <button class="opt">x = 4</button>
+          <button class="opt">x = 5</button>
+          <button class="opt">x = 6</button>
+          <button class="opt">x = 7</button>
+        </div>
+        <div class="verdict"></div>
+      </div>
+
+      <div class="quiz-card reveal" data-answer="0">
+        <div class="qnum">A3</div>
+        <div class="qtext">Чему равен sin 30°?</div>
+        <div class="opts">
+          <button class="opt">½</button>
+          <button class="opt">√2/2</button>
+          <button class="opt">√3/2</button>
+          <button class="opt">1</button>
+        </div>
+        <div class="verdict"></div>
+      </div>
+
+      <div class="quiz-card reveal" data-answer="3">
+        <div class="qnum">A4</div>
+        <div class="qtext">Найдите область определения функции y = √(x − 3)</div>
+        <div class="opts">
+          <button class="opt">x &gt; 3</button>
+          <button class="opt">x ≤ 3</button>
+          <button class="opt">x ≠ 3</button>
+          <button class="opt">x ≥ 3</button>
+        </div>
+        <div class="verdict"></div>
+      </div>
+
+      <div class="quiz-card reveal" data-answer="2">
+        <div class="qnum">A5</div>
+        <div class="qtext">Сумма корней уравнения x² − 5x + 6 = 0 равна</div>
+        <div class="opts">
+          <button class="opt">−5</button>
+          <button class="opt">6</button>
+          <button class="opt">5</button>
+          <button class="opt">−6</button>
+        </div>
+        <div class="verdict"></div>
+      </div>
+    </div>
+
+    <div class="quiz-actions">
+      <button class="btn red" id="checkQuiz">Проверить ответы</button>
+      <button class="btn ghost" id="resetQuiz" style="display:none">Пройти заново</button>
+    </div>
+
+    <div class="quiz-result" id="quizResult">
+      <div class="score" id="quizScore"></div>
+      <p id="quizAdvice"></p>
+      <a href="#signup" class="btn" style="margin-top:16px" id="quizCta">Разобрать мои пробелы на бесплатном занятии</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======== ПРОГРАММА ======== -->
+<section id="program">
+  <div class="wrap">
+    <span class="eyebrow">что внутри курса</span>
+    <h2 class="reveal">Программа: весь ЦТ — по полочкам</h2>
+    <p style="color:var(--graphite);max-width:600px">Каждый модуль — это теория с нуля, приёмы решения именно тестовых заданий и домашка с проверкой. Раз в месяц — пробный ЦТ в реальном тайминге.</p>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="t1">Годовой · 11 класс</button>
+      <button class="tab" data-tab="t2">База · 10 класс</button>
+      <button class="tab" data-tab="t3">Экспресс · с февраля</button>
+    </div>
+
+    <div class="panel active" id="t1">
+      <div class="prog-grid">
+        <div class="prog-card reveal"><div class="mod">модуль 1</div><h3>Числа и выражения</h3><p>Степени, корни, логарифмы, модули. Задания A1–A6 — до автоматизма.</p></div>
+        <div class="prog-card reveal"><div class="mod">модуль 2</div><h3>Уравнения и неравенства</h3><p>Рациональные, иррациональные, показательные, логарифмические. Метод интервалов.</p></div>
+        <div class="prog-card reveal"><div class="mod">модуль 3</div><h3>Функции и графики</h3><p>Чтение графиков, преобразования, производная в тестовых заданиях.</p></div>
+        <div class="prog-card reveal"><div class="mod">модуль 4</div><h3>Планиметрия</h3><p>Треугольники, окружности, площади — самые «дорогие» баллы части B.</p></div>
+        <div class="prog-card reveal"><div class="mod">модуль 5</div><h3>Стереометрия + тригонометрия</h3><p>Темы, которых боятся все, — разбираем на моделях, а не на формулах наизусть.</p></div>
+        <div class="prog-card reveal"><div class="mod">модуль 6</div><h3>Текстовые задачи и прогрессии</h3><p>Проценты, движение, работа, смеси. Плюс полный марафон пробников.</p></div>
+      </div>
+      <div class="prog-meta"><span>⏱ <b>сентябрь — июнь</b>, 2 занятия в неделю</span><span>📝 <b>10 пробных ЦТ</b> за год</span><span>👥 группы до <b>6 человек</b></span></div>
+    </div>
+
+    <div class="panel" id="t2">
+      <div class="prog-grid">
+        <div class="prog-card reveal"><div class="mod">этап 1</div><h3>Ликвидация пробелов 5–9 классов</h3><p>Дроби, проценты, преобразования — фундамент, без которого ЦТ не решается.</p></div>
+        <div class="prog-card reveal"><div class="mod">этап 2</div><h3>Программа 10 класса на опережение</h3><p>Идём чуть впереди школы: в классе становится легко, оценки растут сами.</p></div>
+        <div class="prog-card reveal"><div class="mod">этап 3</div><h3>Первые задания ЦТ</h3><p>К концу года спокойно решаем половину части A настоящего теста.</p></div>
+      </div>
+      <div class="prog-meta"><span>⏱ <b>весь учебный год</b>, 1–2 занятия в неделю</span><span>🎯 цель — войти в 11 класс <b>без пробелов</b></span></div>
+    </div>
+
+    <div class="panel" id="t3">
+      <div class="prog-grid">
+        <div class="prog-card reveal"><div class="mod">спринт 1</div><h3>Диагностика + топ-темы</h3><p>Пробник в первый день. Дальше качаем только то, что даёт максимум баллов лично тебе.</p></div>
+        <div class="prog-card reveal"><div class="mod">спринт 2</div><h3>Интенсив по части A</h3><p>Скорость и точность: техника решения за 1,5–2 минуты на задание.</p></div>
+        <div class="prog-card reveal"><div class="mod">спринт 3</div><h3>Штурм части B + пробники каждую неделю</h3><p>Реальный тайминг, реальные бланки, разбор каждой ошибки.</p></div>
+      </div>
+      <div class="prog-meta"><span>⏱ <b>февраль — июнь</b>, 3 занятия в неделю</span><span>⚡ для тех, кто <b>опомнился поздно</b> — и это нормально</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== ПЛАНИРОВЩИК ======== -->
+<section class="plan" id="plan">
+  <div class="wrap plan-in">
+    <div>
+      <span class="eyebrow">математика о твоей подготовке</span>
+      <h2>Планировщик балла</h2>
+      <p class="sub">Подвигай ползунки — посчитаю, сколько заниматься, чтобы успеть к экзамену. Формула простая: практика × регулярность.</p>
+
+      <div class="slider-row">
+        <label>Мой балл на пробнике сейчас <output id="curOut">40</output></label>
+        <input type="range" id="curScore" min="0" max="100" value="40" step="5">
+      </div>
+      <div class="slider-row">
+        <label>Хочу получить на ЦТ <output id="tgtOut">80</output></label>
+        <input type="range" id="tgtScore" min="10" max="100" value="80" step="5">
+      </div>
+    </div>
+
+    <div class="plan-out">
+      <div class="line"><span>Нужно прибавить</span><b id="gapOut">+40 баллов</b></div>
+      <div class="line"><span>Недель до ЦТ</span><b id="weeksOut">—</b></div>
+      <div class="line"><span>Рекомендуемая нагрузка</span><b id="loadOut">—</b></div>
+      <div class="line"><span>Подходящий формат</span><b id="trackOut">—</b></div>
+      <div class="advice" id="adviceOut"></div>
+      <a href="#signup" class="btn red">Составить мой план на бесплатной встрече</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======== ОБО МНЕ ======== -->
+<section id="about" class="about grid-bg">
+  <div class="wrap about-in">
+    <div class="photo-frame reveal">
+      <div class="ph">место для фото Ирины<br>(замени этот блок на &lt;img&gt;)</div>
+      <div class="cap">Ирина Олехник</div>
+    </div>
+    <div>
+      <span class="eyebrow">кто ведёт курс</span>
+      <h2>Меня зовут Ирина, и я умею объяснять</h2>
+      <p style="color:var(--graphite);margin-bottom:10px">Преподаватель математики. Моя специализация — подготовка к ЦТ и ЦЭ: я знаю структуру теста, типичные ловушки составителей и то, как за учебный год превратить «у меня нет способностей» в стабильные 80+.</p>
+      <ul>
+        <li>12+ лет преподавания, сотни подготовленных выпускников</li>
+        <li>Каждый год сама прорешиваю все варианты ЦТ и ЦЭ — держу руку на пульсе изменений</li>
+        <li>Авторские конспекты и тренажёры: вся теория теста умещается в одну тетрадь</li>
+        <li>Родителям — отчёт о прогрессе после каждого пробника</li>
+      </ul>
+      <blockquote>«В математике нет "не дано". Есть пробелы — и у каждого пробела есть номер темы, с которой мы его закрываем».</blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ======== ОТЗЫВЫ ======== -->
+<section class="reviews">
+  <div class="wrap">
+    <span class="eyebrow">проверено учениками</span>
+    <h2 class="reveal">Отзывы и баллы</h2>
+    <div class="rev-track" id="revTrack">
+      <div class="rev"><div class="score-tag">42 → 87</div><p>«Пришла в октябре с паникой и 42 баллами на пробнике. Ирина Викторовна разложила всё по темам, каждую неделю видела свой прогресс в цифрах. На ЦТ — 87!»</p><div class="who">Полина, выпуск 2025 · поступила в БГУ</div></div>
+      <div class="rev"><div class="score-tag">часть B ✓</div><p>«Геометрию не понимал вообще. Через полгода решал задания части B, которые раньше даже не читал. Главное — стало понятно, ЗАЧЕМ каждая формула».</p><div class="who">Артём, выпуск 2025 · БНТУ</div></div>
+      <div class="rev"><div class="score-tag">+35 баллов</div><p>«Сын занимался в группе из пяти человек — внимания как на индивидуальных. После каждого пробника получала разбор: что выросло, что западает. Очень честный формат».</p><div class="who">Наталья, мама ученика</div></div>
+      <div class="rev"><div class="score-tag">91/100</div><p>«Экспресс с февраля — думала, нереально. Оказалось, реально, если заниматься по системе, а не по панике. 91 балл, до сих пор не верю».</p><div class="who">Дарья, выпуск 2026</div></div>
+      <div class="rev"><div class="score-tag">с 3 на 8</div><p>«Записались в 10 классе, чтобы подтянуть школу. Оценка выросла с 3–4 до 7–8, и в 11 класс пошли уже спокойно — база есть».</p><div class="who">Сергей, отец десятиклассницы</div></div>
+    </div>
+    <div class="rev-nav">
+      <button id="revPrev" aria-label="Назад">←</button>
+      <button id="revNext" aria-label="Вперёд">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- ======== ЦЕНЫ ======== -->
+<section id="prices">
+  <div class="wrap">
+    <span class="eyebrow">честно и без звёздочек</span>
+    <h2 class="reveal">Форматы и цены</h2>
+    <div class="price-grid">
+      <div class="price reveal">
+        <h3>Мини-группа</h3>
+        <div class="cost">35 <span>BYN / занятие</span></div>
+        <ul>
+          <li>до 6 человек, 90 минут</li>
+          <li>2 занятия в неделю</li>
+          <li>пробный ЦТ ежемесячно</li>
+          <li>проверка домашних работ</li>
+          <li>чат группы с поддержкой</li>
+        </ul>
+        <a href="#signup" class="btn ghost">Записаться в группу</a>
+      </div>
+      <div class="price hot reveal">
+        <div class="flag">выбор большинства</div>
+        <h3>Индивидуально</h3>
+        <div class="cost">60 <span>BYN / занятие</span></div>
+        <ul>
+          <li>персональная программа под твои пробелы</li>
+          <li>гибкое расписание, онлайн или очно</li>
+          <li>разбор каждого пробника один на один</li>
+          <li>связь с преподавателем между занятиями</li>
+          <li>отчёты родителям о прогрессе</li>
+        </ul>
+        <a href="#signup" class="btn red">Забрать время в расписании</a>
+      </div>
+      <div class="price reveal">
+        <h3>Пара (2 ученика)</h3>
+        <div class="cost">40 <span>BYN / занятие с человека</span></div>
+        <ul>
+          <li>занимайся с другом одного уровня</li>
+          <li>динамика группы + внимание индивидуалки</li>
+          <li>вся программа годового курса</li>
+          <li>пробные ЦТ и проверка домашек</li>
+        </ul>
+        <a href="#signup" class="btn ghost">Прийти вдвоём</a>
+      </div>
+    </div>
+    <p class="hand" style="font-size:24px;margin-top:24px;transform:rotate(-1deg)">первое занятие-диагностика — бесплатно для всех форматов ✦</p>
+  </div>
+</section>
+
+<!-- ======== FAQ ======== -->
+<section id="faq" class="grid-bg">
+  <div class="wrap" style="max-width:820px">
+    <span class="eyebrow">частые вопросы родителей и учеников</span>
+    <h2 class="reveal">Вопросы, которые задают все</h2>
+    <details class="reveal"><summary>У ребёнка «нет способностей к математике». Есть смысл?</summary><div class="a">Да. За 12 лет я не встретила ни одного школьника, которому нельзя поднять балл. «Нет способностей» почти всегда означает пробелы за 5–8 классы — их мы находим на бесплатной диагностике и закрываем по списку. Дальше математика внезапно начинает получаться.</div></details>
+    <details class="reveal"><summary>Онлайн или очно?</summary><div class="a">Оба формата. Онлайн-занятия идут с интерактивной доской, все конспекты и записи остаются у ученика. Эффективность одинаковая — важна не форма, а система и регулярность.</div></details>
+    <details class="reveal"><summary>Когда лучше начинать подготовку?</summary><div class="a">Идеально — с 10 класса: спокойный темп и запас времени. Реально — с сентября 11 класса. Возможно — экспресс с февраля, но это интенсив с тремя занятиями в неделю. Чем раньше начнём, тем меньше стресса в мае.</div></details>
+    <details class="reveal"><summary>Чем отличается подготовка к ЦТ от школьных уроков?</summary><div class="a">ЦТ — это отдельный жанр: тайминг, формат бланков, типовые конструкции заданий и ловушки составителей. Мы учим не только математику, но и стратегию теста: что решать первым, где нельзя терять время, как проверять себя.</div></details>
+    <details class="reveal"><summary>Как я пойму, что есть прогресс?</summary><div class="a">По цифрам. Раз в месяц — пробный ЦТ в реальном тайминге, после него ученик и родители получают разбор: балл, динамика, темы-провалы, план на следующий месяц. Никаких «ну, вроде лучше» — только измеримый результат.</div></details>
+    <details class="reveal"><summary>Что нужно для старта?</summary><div class="a">Записаться на бесплатное занятие-диагностику. За 60 минут проверим текущий уровень, определим целевой балл и подберём формат. Никаких обязательств — уйти с планом можно и без покупки курса.</div></details>
+  </div>
+</section>
+
+<!-- ======== ФОРМА ======== -->
+<section class="signup" id="signup" style="padding:0">
+  <div class="grid-bg2">
+    <div class="wrap form-in">
+      <div>
+        <span class="eyebrow">осталось одно действие</span>
+        <h2>Запишись на бесплатную диагностику</h2>
+        <p class="sub">Оставь контакты — я свяжусь в течение дня, договоримся о времени. Займёт 60 минут: пробные задания, разбор уровня и личный план подготовки.</p>
+        <div class="contact-list">
+          <div>📱 Telegram: <a href="#">@irina_olehnik_math</a></div>
+          <div>📞 Телефон: <a href="tel:+375000000000">+375 (XX) XXX-XX-XX</a></div>
+          <div>📸 Instagram: <a href="#">@olehnik.math</a></div>
+        </div>
+        <p class="hand" style="font-size:24px;margin-top:26px">мест в группах на новый учебный год — по 6, разбирают быстро!</p>
+      </div>
+
+      <form class="lead-form" id="leadForm">
+        <div id="formFields">
+          <label for="fName">Имя ученика</label>
+          <input id="fName" type="text" placeholder="Например, Маша" required>
+          <label for="fPhone">Телефон или Telegram родителя</label>
+          <input id="fPhone" type="text" placeholder="+375 ..." required>
+          <label for="fGrade">Класс</label>
+          <select id="fGrade">
+            <option>11 класс</option>
+            <option>10 класс</option>
+            <option>9 класс</option>
+            <option>Другое</option>
+          </select>
+          <label for="fGoal">Цель</label>
+          <select id="fGoal">
+            <option>Сдать ЦТ/ЦЭ на 80+</option>
+            <option>Сдать ЦТ/ЦЭ на 60+</option>
+            <option>Подтянуть школьную программу</option>
+            <option>Пока просто узнать уровень</option>
+          </select>
+          <button type="submit" class="btn red">Записаться бесплатно</button>
+          <p style="font-size:12.5px;color:var(--graphite);margin-top:12px">Нажимая кнопку, вы соглашаетесь на обработку контактных данных для связи по вопросу записи.</p>
+        </div>
+        <div class="form-ok" id="formOk">
+          <div class="hand">Заявка принята! ✓</div>
+          <p style="color:var(--graphite);margin-top:8px">Ирина свяжется с вами в течение дня. А пока можно пройти <a href="#quiz">пробный тест</a> — на диагностике разберём результат.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <div>© 2026 Ирина Олехник · подготовка к ЦТ и ЦЭ по математике</div>
+    <div class="hand">пусть на экзамене всё сойдётся ∎</div>
+  </div>
+</footer>
+
+<script>
+/* ===== мобильное меню ===== */
+const burger=document.getElementById('burger');
+const navLinks=document.getElementById('navLinks');
+burger.addEventListener('click',()=>navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+
+/* ===== обратный отсчёт до ЦТ ===== */
+const EXAM_DATE=new Date('2027-06-14T09:00:00'); // ← поменяй дату экзамена здесь
+function tick(){
+  let diff=EXAM_DATE-new Date();
+  if(diff<0)diff=0;
+  const d=Math.floor(diff/864e5), h=Math.floor(diff%864e5/36e5),
+        m=Math.floor(diff%36e5/6e4), s=Math.floor(diff%6e4/1e3);
+  cd_d.textContent=d; cd_h.textContent=String(h).padStart(2,'0');
+  cd_m.textContent=String(m).padStart(2,'0'); cd_s.textContent=String(s).padStart(2,'0');
+}
+const cd_d=document.getElementById('cd-d'),cd_h=document.getElementById('cd-h'),
+      cd_m=document.getElementById('cd-m'),cd_s=document.getElementById('cd-s');
+tick(); setInterval(tick,1000);
+
+/* ===== мини-тест ===== */
+const cards=[...document.querySelectorAll('.quiz-card')];
+cards.forEach(card=>{
+  card.querySelectorAll('.opt').forEach((btn,i)=>{
+    btn.addEventListener('click',()=>{
+      if(card.classList.contains('checked'))return;
+      card.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));
+      btn.classList.add('sel');
+      card.dataset.sel=i;
+    });
+  });
+});
+document.getElementById('checkQuiz').addEventListener('click',()=>{
+  let score=0, answered=0;
+  cards.forEach(card=>{
+    const sel=card.dataset.sel, ans=+card.dataset.answer;
+    if(sel===undefined)return;
+    answered++;
+    card.classList.add('checked');
+    const opts=card.querySelectorAll('.opt');
+    opts[ans].classList.add('correct');
+    if(+sel===ans){score++;card.classList.add('right');card.querySelector('.verdict').textContent='верно! ✓';}
+    else{opts[+sel].classList.add('incorrect');card.classList.add('wrong');
+         card.querySelector('.verdict').textContent='ошибка — правильный ответ подсвечен';}
+  });
+  if(!answered){alert('Ответь хотя бы на один вопрос :)');return;}
+  const res=document.getElementById('quizResult');
+  const advice={
+    5:'Отличная база! Тебе нужен курс не «с нуля», а на скорость и часть B — там прячутся баллы до 100.',
+    4:'Крепкий уровень. Пара западающих тем — и часть A будет безошибочной. Дальше — штурм части B.',
+    3:'Середина пути: база есть, но пробелы съедают баллы. На диагностике составим точный список тем.',
+    2:'Есть над чем работать — и это хорошо, что ты узнал(а) это сейчас, а не на экзамене. Начнём с фундамента.',
+    1:'Не переживай: почти все мои 80-балльники начинали примерно отсюда. Главное — начать по системе.',
+    0:'Ноль — это просто точка отсчёта. От неё удобнее всего считать прогресс. Приходи на диагностику.'
+  };
+  document.getElementById('quizScore').textContent=`Твой результат: ${score} из 5`;
+  document.getElementById('quizAdvice').textContent=advice[score];
+  res.style.display='block';
+  document.getElementById('resetQuiz').style.display='inline-block';
+  res.scrollIntoView({behavior:'smooth',block:'center'});
+});
+document.getElementById('resetQuiz').addEventListener('click',()=>{
+  cards.forEach(card=>{
+    card.classList.remove('checked','right','wrong');
+    delete card.dataset.sel;
+    card.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel','correct','incorrect'));
+    card.querySelector('.verdict').textContent='';
+  });
+  document.getElementById('quizResult').style.display='none';
+  document.getElementById('resetQuiz').style.display='none';
+  document.getElementById('quizBox').scrollIntoView({behavior:'smooth'});
+});
+
+/* ===== вкладки программы ===== */
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+
+/* ===== планировщик балла ===== */
+const cur=document.getElementById('curScore'), tgt=document.getElementById('tgtScore');
+function plan(){
+  const c=+cur.value, t=+tgt.value;
+  document.getElementById('curOut').textContent=c;
+  document.getElementById('tgtOut').textContent=t;
+  const gap=Math.max(0,t-c);
+  document.getElementById('gapOut').textContent=(gap? '+'+gap:'0')+' баллов';
+  const weeks=Math.max(1,Math.floor((EXAM_DATE-new Date())/6048e5));
+  document.getElementById('weeksOut').textContent=weeks;
+  // эмпирика: ~1 балл ≈ 2 часа системной практики
+  const hrs=gap? Math.min(12,Math.max(2,Math.ceil(gap*2/weeks))):2;
+  document.getElementById('loadOut').textContent=hrs+' ч / неделю';
+  let track,adv;
+  if(gap===0){track='Поддержка формы';adv='Цель уже достигнута? Тогда идём выше — потолок 100 ;)';}
+  else if(hrs<=3){track='Мини-группа, 2 занятия/нед';adv='Времени достаточно — идём спокойно и без стресса.';}
+  else if(hrs<=6){track='Мини-группа + домашняя практика';adv='Рабочий темп. Начинаем в этом месяце — успеваем с запасом.';}
+  else if(hrs<=9){track='Индивидуально или пара';adv='Плотный график: нужен персональный план. Приходи на диагностику.';}
+  else{track='Индивидуальный интенсив';adv='Амбициозно! Но у меня такие кейсы были — обсудим честный план на встрече.';}
+  document.getElementById('trackOut').textContent=track;
+  document.getElementById('adviceOut').textContent=adv;
+}
+cur.addEventListener('input',plan); tgt.addEventListener('input',plan); plan();
+
+/* ===== слайдер отзывов ===== */
+const track=document.getElementById('revTrack');
+document.getElementById('revPrev').addEventListener('click',()=>track.scrollBy({left:-360,behavior:'smooth'}));
+document.getElementById('revNext').addEventListener('click',()=>track.scrollBy({left:360,behavior:'smooth'}));
+
+/* ===== форма ===== */
+document.getElementById('leadForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  document.getElementById('formFields').style.display='none';
+  document.getElementById('formOk').style.display='block';
+  /* Чтобы заявки приходили тебе: подключи Formspree/Telegram-бота
+     или замени этот обработчик на отправку fetch(...) на свой бэкенд. */
+});
+
+/* ===== появление при скролле ===== */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);}
+}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
